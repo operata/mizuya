@@ -1,0 +1,66 @@
+amends "package://github.com/jdx/hk/releases/download/v2.6.0/hk@2.6.0#/Config.pkl"
+import "package://github.com/jdx/hk/releases/download/v2.6.0/hk@2.6.0#/Builtins.pkl" as BaseBuiltins
+
+/// Base linters shared across every Operata repo. A consumer's hk.pkl does
+/// `amends "configs/hk.pkl"` (or, from another repo, amends a published package or
+/// submodule copy of this file) and adds its own stack-specific steps into the same
+/// top-level `steps` mapping — re-declaring `steps { }` merges new keys in rather than
+/// replacing the base. Tag anything slow/network-heavy with `profiles = List("slow")` so
+/// `hk check`/`hk fix` skip it by default; `hk check --slow` (or `HK_PROFILE=slow`) runs it.
+///
+/// Import Builtins.pkl under an alias other than `Builtins` here (not the default name) —
+/// a consumer's own separate `import ".../Builtins.pkl"` bound to the same name `Builtins`
+/// as a base module's import resolves to an untyped `Dynamic`, not the real module.
+steps {
+  // repo guards
+  ["trailing-whitespace"] = BaseBuiltins.trailing_whitespace
+  ["end-of-file-fixer"] = BaseBuiltins.newlines
+  ["mixed-line-ending"] = BaseBuiltins.mixed_line_ending // normalise CRLF/LF within a file
+  ["check-case-conflict"] = BaseBuiltins.check_case_conflict // names that clash on case-insensitive filesystems
+  ["check-executables-have-shebangs"] = BaseBuiltins.check_executables_have_shebangs
+  ["check-added-large-files"] = BaseBuiltins.check_added_large_files
+  ["check-symlinks"] = BaseBuiltins.check_symlinks // catch broken/dangling symlinks
+  ["check-merge-conflict"] = BaseBuiltins.check_merge_conflict // block leftover conflict markers
+  ["detect-private-key"] = BaseBuiltins.detect_private_key // block commiting SSH/PEM keys
+  ["editorconfig-checker"] = BaseBuiltins.editorconfig_checker // enforce .editorconfig
+
+  // config languages
+  ["tombi"] = BaseBuiltins.tombi
+  ["mise"] = BaseBuiltins.mise
+
+  // shell
+  ["shfmt"] = BaseBuiltins.shfmt
+  ["shellcheck"] = BaseBuiltins.shellcheck
+
+  // yaml
+  ["ryl"] = BaseBuiltins.ryl
+}
+
+hooks {
+  // If mise-pinned versions change, auto-install them on pull (merge & rebase).
+  ["post-merge"] {
+    steps {
+      ["mise-install"] { glob = "mise.toml"; check = "mise install" }
+    }
+  }
+  ["post-rewrite"] {
+    steps {
+      ["mise-install"] { glob = "mise.toml"; check = "mise install" }
+    }
+  }
+  ["pre-commit"] {
+    fix = true
+    stash = "git"
+    steps {
+      ["no-commit-to-branch"] = BaseBuiltins.no_commit_to_branch
+      // If mise.toml or its lockfile changed, regenerate mise.lock for linux-x64, linux-arm64 & macos-arm64 arch.
+      ["mise-lock"] {
+        glob = List("mise.toml", "mise.lock")
+        fix = "mise lock --platform linux-x64,linux-arm64,macos-arm64"
+        stage = "mise.lock"
+      }
+    }
+  }
+}
+
+warnings = List("missing-profiles")

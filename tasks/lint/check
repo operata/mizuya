@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+#MISE description="Run lint + formatting checks"
+hk check --all --slow --no-fail-fast
