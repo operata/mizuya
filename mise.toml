@@ -1,0 +1,15 @@
+min_version = "2026.10.8"
+
+[tools]
+editorconfig-checker = "4.0.2"
+"github:owenlamont/ryl" = "0.24.0" # lints & auto-fixes YAML (Rust yamllint)
+hk = "2.6.0"                       # runner to orchestrate the hooks below
+shellcheck = "0.11.0"              # lints shell scripts
+shfmt = "3.14.1"                   # formats shell scripts
+tombi = "1.8.4"                    # formats & lints TOML (mise.toml, *.toml)
+
+[hooks]
+postinstall = "hk install --mise"
+
+[env]
+GOPRIVATE = "github.com/operata"

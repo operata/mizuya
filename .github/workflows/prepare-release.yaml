@@ -1,0 +1,79 @@
+name: Prepare release
+# On every push to main, recompute the next version from Conventional Commits
+# and open/update the "release" PR with the changelog. No tag is created here.
+on:
+  push:
+    branches: [main]
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+permissions: {}
+jobs:
+  prepare-release:
+    # Skip the merge commit produced by merging the release PR itself.
+    if: "!contains(github.event.head_commit.message, 'chore: prepare release')"
+    runs-on: ubuntu-slim
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Mint GitHub App token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1  # v3.2.0
+        id: app-token
+        with:
+          client-id: ${{ secrets.RELEASE_BOT_APP_CLIENT_ID }}
+          private-key: ${{ secrets.RELEASE_BOT_APP_PRIVATE_KEY }}
+          owner: Operata
+          repositories: |
+            ${{ github.repository }}
+          permission-contents: write
+          permission-pull-requests: write
+          permission-metadata: read
+      - name: Get GitHub App User ID
+        id: get-user-id
+        run: echo "user-id=$(gh api "/users/${STEPS_APP_TOKEN_OUTPUTS_APP_SLUG}[bot]" --jq .id)" >> "$GITHUB_OUTPUT"
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          STEPS_APP_TOKEN_OUTPUTS_APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
+      - run: |
+          git config --global user.name "${STEPS_APP_TOKEN_OUTPUTS_APP_SLUG}[bot]"
+          git config --global user.email "${STEPS_GET_USER_ID_OUTPUTS_USER_ID}+${STEPS_APP_TOKEN_OUTPUTS_APP_SLUG}[bot]@users.noreply.github.com"
+          gh auth setup-git
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          STEPS_APP_TOKEN_OUTPUTS_APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
+          STEPS_GET_USER_ID_OUTPUTS_USER_ID: ${{ steps.get-user-id.outputs.user-id }}
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          fetch-depth: 0
+          token: ${{ steps.app-token.outputs.token }}
+          persist-credentials: false
+      - name: Install Knope
+        uses: knope-dev/action@19617851f9f13ab2f27a05989c55efb18aca3675  # v2.1.2
+        with:
+          version: 0.23.0
+      - name: Install ghcommit
+        # Used by knope to create the prepare-release commit through the GitHub
+        # API so GitHub signs it (Verified) under the release-bot App identity.
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          GHCOMMIT_VERSION: v0.1.78
+        run: |
+          set -euo pipefail
+          case "$(uname -m)" in
+            x86_64) arch=amd64 ;;
+            aarch64|arm64) arch=arm64 ;;
+            *) echo "unsupported arch: $(uname -m)" >&2; exit 1 ;;
+          esac
+          asset="ghcommit_linux_${arch}"
+          gh release download "$GHCOMMIT_VERSION" --repo planetscale/ghcommit \
+            --pattern "$asset" --pattern checksums.txt --dir /tmp/ghcommit
+          ( cd /tmp/ghcommit && grep " ${asset}\$" checksums.txt | sha256sum -c - )
+          mkdir -p "$HOME/.local/bin"
+          install -m 0755 "/tmp/ghcommit/${asset}" "$HOME/.local/bin/ghcommit"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: Prepare release PR
+        run: knope prepare-release-bot --verbose
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}

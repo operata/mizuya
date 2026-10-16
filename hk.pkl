@@ -1,0 +1,7 @@
+amends "hk/base.pkl"
+import "package://github.com/jdx/hk/releases/download/v2.6.0/hk@2.6.0#/Builtins.pkl"
+
+steps {
+  // github-actions
+  ["jactionlint"] = Builtins.jactionlint
+}

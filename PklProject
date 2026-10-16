@@ -1,0 +1,30 @@
+amends "pkl:Project"
+
+/// Shared Operata configs, distributed as a Pkl package so other repos can
+/// `amends "package://github.com/operata/mizuya/releases/download/v\(version)/mizuya@\(version)#/hk/base.pkl"`
+/// instead of keeping a git submodule copy.
+///
+/// `version` is bumped by knope (see knope.toml); releases are tagged `v<version>`.
+package {
+  name = "mizuya"
+  baseUri = "package://github.com/operata/mizuya/releases/download/v\(version)/mizuya"
+  version = "0.1.0"
+  packageZipUrl = "https://github.com/operata/mizuya/releases/download/v\(version)/mizuya@\(version).zip"
+  sourceCode = "https://github.com/operata/mizuya"
+  sourceCodeUrlScheme = "https://github.com/operata/mizuya/blob/v\(version)%{path}#L%{line}-L%{endLine}"
+  authors {
+    "Operata Engineering <hello@operata.com>"
+  }
+
+  // Repo-local tooling, not part of the distributed package.
+  exclude {
+    "PklProject"
+    "PklProject.deps.json"
+    ".**"
+    "mise.*"
+    "tasks/**"
+    "hk.pkl"
+    "knope.toml"
+    "CHANGELOG.md"
+  }
+}
