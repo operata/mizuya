@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+#MISE description="Auto-fix lint + formatting issues"
+hk fix --all --slow --no-fail-fast

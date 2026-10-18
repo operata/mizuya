@@ -1,0 +1,88 @@
+# Knope release configuration
+[package]
+changelog = "CHANGELOG.md"
+versioned_files = [
+  { path = "PklProject", regex = "version = \"(?<version>\\d+\\.\\d+\\.\\d+)\"" },
+]
+
+# --- prepare-release-bot ---------------------------------------------------
+# Run on every push to main. Computes the next version from commits, updates
+# the changelog on a `release` branch, and opens/updates a PR. Merging that PR
+# is what actually ships the release (see the `release` workflow).
+[[workflows]]
+name = "prepare-release-bot"
+
+[[workflows.steps]]
+command = "git switch -C release"
+type = "Command"
+
+[[workflows.steps]]
+type = "PrepareRelease"
+allow_empty = true
+
+# knope's own edits haven't been through the repo's formatters.
+[[workflows.steps]]
+command = "hk fix --no-stage"
+type = "Command"
+
+# Create the prepare-release commit through the GitHub API so GitHub signs it
+# (Verified). A local `git commit` from the bot App cannot be verified, and the
+# default branch requires verified-signed commits. The script force-resets the
+# remote `release` branch and commits knope's working-tree changes on top.
+[[workflows.steps]]
+command = ".github/scripts/prepare-release-commit.sh \"$version\""
+type = "Command"
+
+# --- prepare-release -------------------------------------------------------
+# Plain-git variant for local use (`knope prepare-release`). Same result as the
+# bot workflow but with an ordinary commit instead of the signed ghcommit path.
+[[workflows]]
+name = "prepare-release"
+
+[[workflows.steps]]
+command = "git switch -C release"
+type = "Command"
+
+[[workflows.steps]]
+type = "PrepareRelease"
+allow_empty = true
+
+[[workflows.steps]]
+command = "git commit -m \"chore: prepare release $version\""
+type = "Command"
+
+[[workflows.steps]]
+command = "git push --force --set-upstream origin release"
+type = "Command"
+
+[[workflows.steps]]
+base = "main"
+type = "CreatePullRequest"
+
+[workflows.steps.title]
+template = "chore: prepare release $version"
+
+[workflows.steps.body]
+template = "Merging this PR will tag and release `$version`.\n\n$changelog"
+
+# --- release ---------------------------------------------------------------
+# Run when the `release` PR merges. Creates the GitHub release + `v*` tag,
+# which in turn fires push-artifact.yaml to build and upload the Pkl package.
+[[workflows]]
+name = "release"
+
+[[workflows.steps]]
+type = "Release"
+
+# --- document-change -------------------------------------------------------
+# Optional helper: `knope document-change` to author a changeset for changes
+# that aren't captured by a conventional commit.
+[[workflows]]
+name = "document-change"
+
+[[workflows.steps]]
+type = "CreateChangeFile"
+
+[github]
+owner = "operata"
+repo = "mizuya"
