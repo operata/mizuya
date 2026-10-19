@@ -1,7 +1,6 @@
 amends "hk/base.pkl"
-import "hk/Builtins.pkl" as Builtins
+import "hk/github-actions.pkl" as GithubActions
 
 steps {
-  // github-actions
-  ["jactionlint"] = Builtins.jactionlint
+  ...GithubActions.steps
 }

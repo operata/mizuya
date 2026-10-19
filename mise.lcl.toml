@@ -1,3 +1,5 @@
+include = ["mise/github-actions.toml"]
+
 [task_config]
 includes = ["./tasks"]
 
@@ -5,7 +7,6 @@ includes = ["./tasks"]
 lockfile = true
 
 [tools]
-jactionlint = "2.2.0"
 pkl = "0.32.1"
 
 [tools."github:knope-dev/knope"]

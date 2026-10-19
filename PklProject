@@ -22,6 +22,7 @@ package {
     "PklProject.deps.json"
     ".**"
     "mise.*"
+    "mise/**"
     "tasks/**"
     "hk.pkl"
     "knope.toml"
