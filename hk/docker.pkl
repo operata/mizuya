@@ -1,0 +1,5 @@
+import "Builtins.pkl" as Builtins
+
+steps {
+  ["hadolint"] = Builtins.hadolint
+}
