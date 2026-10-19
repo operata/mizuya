@@ -1,6 +1,10 @@
 import "Builtins.pkl" as Builtins
 
 steps {
-  ["golangci-lint"] = Builtins.golangci_lint
-  ["govulncheck"] = Builtins.go_vuln_check
+  ["golangci-lint-fmt"] = Builtins.golangci_lint_fmt
+  ["go-mod-tidy"] = Builtins.gomod_tidy
+  // Full-ruleset, workspace-wide lint — slow, skipped by default (hk check/fix
+  // need --slow). mizuya's own tasks/lint/check and tasks/lint/fix already pass
+  // --slow, so it still runs via `mise run lint:check`/`lint:fix`.
+  ["golangci-lint"] = (Builtins.golangci_lint) { profiles = List("slow") }
 }

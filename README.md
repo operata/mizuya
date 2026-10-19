@@ -50,7 +50,15 @@ include = [
 ]
 ```
 
-Available stacks: `github-actions` (jactionlint), `go` (golangci-lint, govulncheck).
+A fragment may tag a slow/network-heavy step with `profiles = List("slow")` (see
+`hk/go.pkl`'s full-ruleset `golangci-lint` step); `hk check`/`hk fix` skip those by
+default, `hk check --slow`/`HK_PROFILE=slow` runs them. The shared `lint:check`/
+`lint:fix` tasks (see below) already pass `--slow`, so nothing extra is needed to run
+them via `mise run lint:check`.
+
+Available stacks: `github-actions` (jactionlint), `go` (golangci-lint, go mod tidy —
+govulncheck is pinned as a tool but left for you to wire into your own task, same as
+other Go repos in Operata).
 
 ### mise config + tasks
 
