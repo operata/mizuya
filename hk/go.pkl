@@ -1,0 +1,6 @@
+import "Builtins.pkl" as Builtins
+
+steps {
+  ["golangci-lint"] = Builtins.golangci_lint
+  ["govulncheck"] = Builtins.go_vuln_check
+}

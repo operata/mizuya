@@ -50,7 +50,7 @@ include = [
 ]
 ```
 
-Available stacks: `github-actions` (jactionlint).
+Available stacks: `github-actions` (jactionlint), `go` (golangci-lint, govulncheck).
 
 ### mise config + tasks
 
