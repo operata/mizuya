@@ -1,5 +1,5 @@
 amends "hk/base.pkl"
-import "package://github.com/jdx/hk/releases/download/v2.7.0/hk@2.7.0#/Builtins.pkl"
+import "hk/Builtins.pkl" as Builtins
 
 steps {
   // github-actions

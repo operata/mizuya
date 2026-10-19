@@ -22,6 +22,14 @@ Re-declaring `steps { }` in that file merges your repo's own stack-specific step
 the shared base rather than replacing it. See [`hk.pkl`](hk.pkl) in this repo for an
 example consumer.
 
+For steps built from [hk's Builtins](https://github.com/jdx/hk), import
+`hk/builtins.pkl` from the same package/version instead of pinning `jdx/hk`'s package
+URL yourself, so you stay on the hk version `base.pkl` was built against:
+
+```pkl
+import "package://github.com/operata/mizuya/releases/download/v0.1.0/mizuya@0.1.0#/hk/builtins.pkl" as Builtins
+```
+
 ### mise config + tasks
 
 In a consuming repo's `mise.toml`, pull in the shared toolchain (hk + its linters) and

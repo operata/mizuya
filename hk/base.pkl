@@ -1,5 +1,5 @@
 amends "package://github.com/jdx/hk/releases/download/v2.7.0/hk@2.7.0#/Config.pkl"
-import "package://github.com/jdx/hk/releases/download/v2.7.0/hk@2.7.0#/Builtins.pkl" as BaseBuiltins
+import "Builtins.pkl" as BaseBuiltins
 
 /// Base linters shared across every Operata repo. A consumer's hk.pkl does
 /// `amends "configs/hk.pkl"` (or, from another repo, amends a published package or
@@ -11,6 +11,9 @@ import "package://github.com/jdx/hk/releases/download/v2.7.0/hk@2.7.0#/Builtins.
 /// Import Builtins.pkl under an alias other than `Builtins` here (not the default name) —
 /// a consumer's own separate `import ".../Builtins.pkl"` bound to the same name `Builtins`
 /// as a base module's import resolves to an untyped `Dynamic`, not the real module.
+///
+/// The hk/Builtins version is pinned once in `builtins.pkl`; other repos import it from
+/// the published mizuya package instead of pinning `jdx/hk`'s package URL themselves.
 steps {
   // repo guards
   ["trailing-whitespace"] = BaseBuiltins.trailing_whitespace
