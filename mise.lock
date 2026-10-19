@@ -26,46 +26,46 @@ url_api = "https://api.github.com/repos/editorconfig-checker/editorconfig-checke
 provenance = "github-attestations"
 
 [[tools."github:owenlamont/ryl"]]
-version = "0.24.0"
+version = "0.25.1"
 backend = "github:owenlamont/ryl"
-specifiers = ["0.24.0"]
+specifiers = ["0.25.1"]
 
 [tools."github:owenlamont/ryl"."platforms.linux-arm64"]
-checksum = "sha256:184a727fabbec5a2d2de11fd64483f9c3040f1822d9b4e142d75c2046fef8d6f"
-url = "https://github.com/owenlamont/ryl/releases/download/v0.24.0/ryl-aarch64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/owenlamont/ryl/releases/assets/611310931"
+checksum = "sha256:0d4cb3454fdab4123219a23fbafb2c9b1eb4eb01d8f5faf9dd6adbdff8f17f2e"
+url = "https://github.com/owenlamont/ryl/releases/download/v0.25.1/ryl-aarch64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/owenlamont/ryl/releases/assets/647111947"
 provenance = "github-attestations"
 
 [tools."github:owenlamont/ryl"."platforms.linux-x64"]
-checksum = "sha256:ee496e9d246352abd40bb19b932dda36f5dc23a561ac51d5c56218ba3f25d8a8"
-url = "https://github.com/owenlamont/ryl/releases/download/v0.24.0/ryl-x86_64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/owenlamont/ryl/releases/assets/611310977"
+checksum = "sha256:96cb18b04e2154a56c2569995fa0118237b2864c1bd122eff88cb45504c40c8c"
+url = "https://github.com/owenlamont/ryl/releases/download/v0.25.1/ryl-x86_64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/owenlamont/ryl/releases/assets/647112023"
 provenance = "github-attestations"
 
 [tools."github:owenlamont/ryl"."platforms.macos-arm64"]
-checksum = "sha256:55ae4a170ece424c5a9ac939fc2fadeeddaea62dc3f4303b24d33ad4def3126f"
-url = "https://github.com/owenlamont/ryl/releases/download/v0.24.0/ryl-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/owenlamont/ryl/releases/assets/611310936"
+checksum = "sha256:1544f213b3b675a444a45a5a9d24ea62d6d1c8ab2894210bd92448fec4e9a91a"
+url = "https://github.com/owenlamont/ryl/releases/download/v0.25.1/ryl-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/owenlamont/ryl/releases/assets/647111943"
 provenance = "github-attestations"
 
 [[tools.hk]]
-version = "2.6.0"
+version = "2.7.0"
 backend = "packslip:github.com/jdx/hk"
-specifiers = ["2.6.0"]
+specifiers = ["2.7.0"]
 
 [tools.hk."platforms.linux-arm64"]
-checksum = "sha256:bcccd60f962a784bcf602b3a1ee6aac4dc53c76b298bffe38c4f9101725d2fb0"
-url = "https://github.com/jdx/hk/releases/download/v2.6.0/hk-aarch64-unknown-linux-gnu.tar.gz"
+checksum = "sha256:a64c8cead6f9a47e6bf4d639122ca3eeba60480763076330ba230a8cb7821520"
+url = "https://github.com/jdx/hk/releases/download/v2.7.0/hk-aarch64-unknown-linux-gnu.tar.gz"
 signer = "sigstore-oidc:https://github.com/jdx/hk/.github/workflows/release.yml"
 
 [tools.hk."platforms.linux-x64"]
-checksum = "sha256:dfc2e1140a114c28f42fa6d1b958fac7008de3b96b19bbf74d693c0f86bcff60"
-url = "https://github.com/jdx/hk/releases/download/v2.6.0/hk-x86_64-unknown-linux-gnu.tar.gz"
+checksum = "sha256:2d5819ee2bc3e5b424d90fb05928c05297bfa4d36490628b075b8f8afe14b7b1"
+url = "https://github.com/jdx/hk/releases/download/v2.7.0/hk-x86_64-unknown-linux-gnu.tar.gz"
 signer = "sigstore-oidc:https://github.com/jdx/hk/.github/workflows/release.yml"
 
 [tools.hk."platforms.macos-arm64"]
-checksum = "sha256:40a336e793397d5940b284aae674477d430b24dc86167be92e080120d80e42f2"
-url = "https://github.com/jdx/hk/releases/download/v2.6.0/hk-aarch64-apple-darwin.tar.gz"
+checksum = "sha256:3b98dd45e493a421de5b327c87b3e0fdfac39383e11b6a2b48b43bbc5a9ce0d6"
+url = "https://github.com/jdx/hk/releases/download/v2.7.0/hk-aarch64-apple-darwin.tar.gz"
 signer = "sigstore-oidc:https://github.com/jdx/hk/.github/workflows/release.yml"
 
 [[tools.shellcheck]]
@@ -109,24 +109,24 @@ url = "https://github.com/mvdan/sh/releases/download/v3.14.1/shfmt_v3.14.1_darwi
 url_api = "https://api.github.com/repos/mvdan/sh/releases/assets/547320930"
 
 [[tools.tombi]]
-version = "1.8.4"
+version = "1.8.5"
 backend = "aqua:tombi-toml/tombi"
-specifiers = ["1.8.4"]
+specifiers = ["1.8.5"]
 
 [tools.tombi."platforms.linux-arm64"]
-checksum = "sha256:681003a505bfb40f79ec8e833dda0d5c03e5f43c4c362f494ee8d6652775c73a"
-url = "https://github.com/tombi-toml/tombi/releases/download/v1.8.4/tombi-cli-1.8.4-aarch64-unknown-linux-musl.tar.gz"
-url_api = "https://api.github.com/repos/tombi-toml/tombi/releases/assets/633725972"
+checksum = "sha256:96665a5b2be8d87102f341c26487d31a1452a8aff11b2d9019deaf592b5e2ac9"
+url = "https://github.com/tombi-toml/tombi/releases/download/v1.8.5/tombi-cli-1.8.5-aarch64-unknown-linux-musl.tar.gz"
+url_api = "https://api.github.com/repos/tombi-toml/tombi/releases/assets/645790734"
 provenance = "github-attestations"
 
 [tools.tombi."platforms.linux-x64"]
-checksum = "sha256:597e08f9fa336b365c011c94387997dd3d2dadd904cde5b7dc55033d29680e5e"
-url = "https://github.com/tombi-toml/tombi/releases/download/v1.8.4/tombi-cli-1.8.4-x86_64-unknown-linux-musl.tar.gz"
-url_api = "https://api.github.com/repos/tombi-toml/tombi/releases/assets/633726039"
+checksum = "sha256:3663f6e90fb2c4026594867c651e040c6000c48406747215ad6e71c6066891c1"
+url = "https://github.com/tombi-toml/tombi/releases/download/v1.8.5/tombi-cli-1.8.5-x86_64-unknown-linux-musl.tar.gz"
+url_api = "https://api.github.com/repos/tombi-toml/tombi/releases/assets/645790776"
 provenance = "github-attestations"
 
 [tools.tombi."platforms.macos-arm64"]
-checksum = "sha256:ec873e21e7165007d4ba785c817b2ffd26b3833396bdbf80cfe49540d45f08f8"
-url = "https://github.com/tombi-toml/tombi/releases/download/v1.8.4/tombi-cli-1.8.4-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/tombi-toml/tombi/releases/assets/633726028"
+checksum = "sha256:0533e3bf3c271d124e717bbc1acaefdc8302978463e335e00d35f0373643244f"
+url = "https://github.com/tombi-toml/tombi/releases/download/v1.8.5/tombi-cli-1.8.5-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/tombi-toml/tombi/releases/assets/645790735"
 provenance = "github-attestations"
