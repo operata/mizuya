@@ -23,12 +23,34 @@ the shared base rather than replacing it. See [`hk.pkl`](hk.pkl) in this repo fo
 example consumer.
 
 For steps built from [hk's Builtins](https://github.com/jdx/hk), import
-`hk/builtins.pkl` from the same package/version instead of pinning `jdx/hk`'s package
+`hk/Builtins.pkl` from the same package/version instead of pinning `jdx/hk`'s package
 URL yourself, so you stay on the hk version `base.pkl` was built against:
 
 ```pkl
-import "package://github.com/operata/mizuya/releases/download/v0.1.0/mizuya@0.1.0#/hk/builtins.pkl" as Builtins
+import "package://github.com/operata/mizuya/releases/download/v0.1.0/mizuya@0.1.0#/hk/Builtins.pkl" as Builtins
 ```
+
+### Stack packs
+
+Each stack ships an opt-in hk steps fragment plus a matching mise tools fragment. Pull
+in only the ones your repo needs; spread a fragment's `steps` into your own `hk.pkl`:
+
+```pkl
+amends "package://github.com/operata/mizuya/releases/download/v0.1.0/mizuya@0.1.0#/hk/base.pkl"
+import "package://github.com/operata/mizuya/releases/download/v0.1.0/mizuya@0.1.0#/hk/github-actions.pkl" as GithubActions
+
+steps {
+  ...GithubActions.steps
+}
+```
+
+```toml
+include = [
+  "git::https://github.com/operata/mizuya.git//mise/github-actions.toml?ref=v0.1.0",
+]
+```
+
+Available stacks: `github-actions` (jactionlint).
 
 ### mise config + tasks
 
@@ -45,7 +67,9 @@ includes = [
 ]
 ```
 
-Bump the `ref` to pick up a newer release of either.
+Bump the `ref` to pick up a newer release of either. A stack's explicit `[tools]`
+entries in your own `mise.toml` take precedence over the included fragment's, so a
+shared version pin is a default you can override, not a floor.
 
 ## Development
 

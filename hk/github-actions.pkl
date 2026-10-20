@@ -1,0 +1,5 @@
+import "Builtins.pkl" as Builtins
+
+steps {
+  ["jactionlint"] = Builtins.jactionlint
+}
