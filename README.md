@@ -58,7 +58,7 @@ them via `mise run lint:check`.
 
 Available stacks: `github-actions` (jactionlint), `go` (golangci-lint, go mod tidy —
 govulncheck is pinned as a tool but left for you to wire into your own task, same as
-other Go repos in Operata).
+other Go repos in Operata), `docker` (hadolint).
 
 ### mise config + tasks
 
