@@ -6,5 +6,20 @@ steps {
   // Full-ruleset, workspace-wide lint — slow, skipped by default (hk check/fix
   // need --slow). mizuya's own tasks/lint/check and tasks/lint/fix already pass
   // --slow, so it still runs via `mise run lint:check`/`lint:fix`.
-  ["golangci-lint"] = (Builtins.golangci_lint) { profiles = List("slow") }
+  //
+  // workspace_indicator = "go.mod" makes hk run this step once per Go module
+  // in a repo, and hk runs those in parallel. golangci-lint takes a file lock
+  // by default to stop concurrent runs corrupting a shared cache, so parallel
+  // invocations across independent modules fail with "parallel golangci-lint
+  // is running" instead of linting. --allow-parallel-runners is golangci-lint's
+  // own flag for exactly this: concurrent runs over disjoint modules/caches.
+  ["golangci-lint"] = (Builtins.golangci_lint) {
+    profiles = List("slow")
+    check {
+      command = "golangci-lint run --fix=false --allow-parallel-runners ./..."
+    }
+    fix {
+      command = "golangci-lint run --fix --allow-parallel-runners ./..."
+    }
+  }
 }
