@@ -10,9 +10,6 @@ lockfile = true
 pkl = "0.32.1"
 
 [tools."github:knope-dev/knope"]
-version = "v0.23.0"
+version = "v0.23.1"
 version_prefix = "knope/"
-platforms.macos-arm64.asset_pattern = "*aarch64-apple-darwin.tgz"
-platforms.macos-x64.asset_pattern = "*x86_64-apple-darwin.tgz"
-platforms.linux-x64.asset_pattern = "*x86_64-unknown-linux-musl.tgz"
-platforms.linux-arm64.asset_pattern = "*aarch64-unknown-linux-musl.tgz"
+platforms = { macos-arm64 = { asset_pattern = "*aarch64-apple-darwin.tgz" }, macos-x64 = { asset_pattern = "*x86_64-apple-darwin.tgz" }, linux-x64 = { asset_pattern = "*x86_64-unknown-linux-musl.tgz" }, linux-arm64 = { asset_pattern = "*aarch64-unknown-linux-musl.tgz" } }
