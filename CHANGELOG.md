@@ -1,4 +1,10 @@
 # Changelog
+## 0.1.3 (2026-10-21)
+
+### Fixes
+
+- allow parallel golangci-lint runs across workspace modules (#11)
+
 ## 0.1.2 (2026-10-20)
 
 ### Features
