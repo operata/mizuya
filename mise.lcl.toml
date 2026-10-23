@@ -1,4 +1,4 @@
-include = ["mise/github-actions.toml"]
+include = ["github-actions/mise.toml"]
 
 [task_config]
 includes = ["./tasks"]
