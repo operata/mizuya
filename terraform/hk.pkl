@@ -1,0 +1,7 @@
+import "../hk/Builtins.pkl" as Builtins
+
+steps {
+  ["terraform"] = Builtins.terraform
+  ["terraform-validate"] = Builtins.terraform_validate
+  ["tflint"] = Builtins.tf_lint
+}
