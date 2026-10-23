@@ -2,6 +2,29 @@
 
 lockfile_version = 3
 
+[[tools.cosign]]
+version = "3.1.4"
+backend = "aqua:sigstore/cosign"
+specifiers = ["3.1.4"]
+
+[tools.cosign."platforms.linux-arm64"]
+checksum = "sha256:ade83b7aac62e131cacfe96d958948b2150cc9efec46a570a2649b8e27dedad2"
+url = "https://github.com/sigstore/cosign/releases/download/v3.1.4/cosign-linux-arm64"
+url_api = "https://api.github.com/repos/sigstore/cosign/releases/assets/660068106"
+provenance = "cosign"
+
+[tools.cosign."platforms.linux-x64"]
+checksum = "sha256:424e2c97d0b45fd7a6b608a87f090f35633f4c23ece5f092d48bba11aaf4bbfa"
+url = "https://github.com/sigstore/cosign/releases/download/v3.1.4/cosign-linux-amd64"
+url_api = "https://api.github.com/repos/sigstore/cosign/releases/assets/660069428"
+provenance = "cosign"
+
+[tools.cosign."platforms.macos-arm64"]
+checksum = "sha256:9f9b8cd557cf2e5b3df3373a00baa005a86b02391e3e06dd0ce37b3a1533d3a4"
+url = "https://github.com/sigstore/cosign/releases/download/v3.1.4/cosign-darwin-arm64"
+url_api = "https://api.github.com/repos/sigstore/cosign/releases/assets/660069257"
+provenance = "cosign"
+
 [[tools.editorconfig-checker]]
 version = "4.0.2"
 backend = "github:editorconfig-checker/editorconfig-checker"
@@ -49,24 +72,50 @@ url_api = "https://api.github.com/repos/owenlamont/ryl/releases/assets/653435334
 provenance = "github-attestations"
 
 [[tools.hk]]
-version = "2.7.1"
+version = "2.8.0"
 backend = "packslip:github.com/jdx/hk"
-specifiers = ["2.7.1"]
+specifiers = ["2.8.0"]
 
 [tools.hk."platforms.linux-arm64"]
-checksum = "sha256:e37810d8e8bd461ef92c1f0103cb8b415f58d18e689d59d8f5239dd8893676b9"
-url = "https://github.com/jdx/hk/releases/download/v2.7.1/hk-aarch64-unknown-linux-gnu.tar.gz"
+checksum = "sha256:d6802a66213972561f9e4aa4d3274decf3725b1fe513da762c0922274c18955b"
+url = "https://github.com/jdx/hk/releases/download/v2.8.0/hk-aarch64-unknown-linux-gnu.tar.gz"
 signer = "sigstore-oidc:https://github.com/jdx/hk/.github/workflows/release.yml"
 
 [tools.hk."platforms.linux-x64"]
-checksum = "sha256:f6efe9b7febc22cb0ec071ab727ead597752dedb6a36c4d1a7fef94f6d2d8fbf"
-url = "https://github.com/jdx/hk/releases/download/v2.7.1/hk-x86_64-unknown-linux-gnu.tar.gz"
+checksum = "sha256:5b5d7021625d12825b3d44496b466ad65697e02651c8b9fe00117f5c25c73d0a"
+url = "https://github.com/jdx/hk/releases/download/v2.8.0/hk-x86_64-unknown-linux-gnu.tar.gz"
 signer = "sigstore-oidc:https://github.com/jdx/hk/.github/workflows/release.yml"
 
 [tools.hk."platforms.macos-arm64"]
-checksum = "sha256:18914b99e1fdcc0415ba77c8d01b1f4df73b109ed90b3f418053e2f3eaf84cbd"
-url = "https://github.com/jdx/hk/releases/download/v2.7.1/hk-aarch64-apple-darwin.tar.gz"
+checksum = "sha256:9f0290ff3cbfa9f6baff640c846bf07f78dd29e2023b0c230d3d5226c23385ca"
+url = "https://github.com/jdx/hk/releases/download/v2.8.0/hk-aarch64-apple-darwin.tar.gz"
 signer = "sigstore-oidc:https://github.com/jdx/hk/.github/workflows/release.yml"
+
+[[tools.rumdl]]
+version = "0.3.0"
+backend = "aqua:rvben/rumdl"
+specifiers = [
+    "0.3.0",
+    "latest",
+]
+
+[tools.rumdl."platforms.linux-arm64"]
+checksum = "sha256:b0ea55fdbabcc2b86e7ef594c3fd86cfee620844c2d8cea4a3135b9468d2845c"
+url = "https://github.com/rvben/rumdl/releases/download/v0.3.0/rumdl-v0.3.0-aarch64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/rvben/rumdl/releases/assets/649870478"
+provenance = "github-attestations"
+
+[tools.rumdl."platforms.linux-x64"]
+checksum = "sha256:1d23c7f8c10d534e53c76b34a22f7dea7f5e5ebe493adbb7e25a401f88620c87"
+url = "https://github.com/rvben/rumdl/releases/download/v0.3.0/rumdl-v0.3.0-x86_64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/rvben/rumdl/releases/assets/649870483"
+provenance = "github-attestations"
+
+[tools.rumdl."platforms.macos-arm64"]
+checksum = "sha256:bc62f4176dd9257547c939fa152b535b6f393365acd352fcfd94e5e19a792bb4"
+url = "https://github.com/rvben/rumdl/releases/download/v0.3.0/rumdl-v0.3.0-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/rvben/rumdl/releases/assets/649870474"
+provenance = "github-attestations"
 
 [[tools.shellcheck]]
 version = "0.11.0"
