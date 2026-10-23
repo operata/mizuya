@@ -1,6 +1,10 @@
 amends "hk/base.pkl"
-import "hk/github-actions.pkl" as GithubActions
+
+import "github-actions/hk.pkl" as GithubActions
+import "hk/Builtins.pkl" as Builtins
 
 steps {
   ...GithubActions.steps
+  ["pkl"] = Builtins.pkl
+  ["pkl-format"] = Builtins.pkl_format
 }

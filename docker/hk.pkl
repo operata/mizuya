@@ -1,4 +1,4 @@
-import "Builtins.pkl" as Builtins
+import "../hk/Builtins.pkl" as Builtins
 
 steps {
   ["hadolint"] = Builtins.hadolint
