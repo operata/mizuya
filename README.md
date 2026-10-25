@@ -59,7 +59,8 @@ them via `mise run lint:check`.
 Available stacks: `github-actions` (jactionlint), `go` (golangci-lint, go mod tidy —
 govulncheck is pinned as a tool but left for you to wire into your own task, same as
 other Go repos in Operata), `docker` (hadolint), `kubernetes` (kubeconform; helm and
-flux2 pinned as tools).
+flux2 pinned as tools), `terraform` (terraform fmt/validate, tflint; trivy pinned as
+a tool).
 
 ### mise config + tasks
 
