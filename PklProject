@@ -21,6 +21,7 @@ package {
     "PklProject"
     "PklProject.deps.json"
     ".**"
+    "*.toml"
     "mise.*"
     "mise/**"
     "tasks/**"

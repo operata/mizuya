@@ -1,4 +1,4 @@
-import "Builtins.pkl" as Builtins
+import "../hk/Builtins.pkl" as Builtins
 
 steps {
   ["golangci-lint-fmt"] = Builtins.golangci_lint_fmt

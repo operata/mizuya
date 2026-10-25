@@ -1,4 +1,5 @@
-amends "package://github.com/jdx/hk/releases/download/v2.7.0/hk@2.7.0#/Config.pkl"
+amends "package://github.com/jdx/hk/releases/download/v2.8.1/hk@2.8.1#/Config.pkl"
+
 import "Builtins.pkl" as BaseBuiltins
 
 /// Base linters shared across every Operata repo. A consumer's hk.pkl does
@@ -21,6 +22,7 @@ steps {
   ["mixed-line-ending"] = BaseBuiltins.mixed_line_ending // normalise CRLF/LF within a file
   ["check-case-conflict"] = BaseBuiltins.check_case_conflict // names that clash on case-insensitive filesystems
   ["check-executables-have-shebangs"] = BaseBuiltins.check_executables_have_shebangs
+  ["check-shebang-scripts-are-executable"] = BaseBuiltins.check_shebang_scripts_are_executable
   ["check-added-large-files"] = BaseBuiltins.check_added_large_files
   ["check-symlinks"] = BaseBuiltins.check_symlinks // catch broken/dangling symlinks
   ["check-merge-conflict"] = BaseBuiltins.check_merge_conflict // block leftover conflict markers
@@ -37,6 +39,12 @@ steps {
 
   // yaml
   ["ryl"] = BaseBuiltins.ryl
+  ["ryl_format"] = BaseBuiltins.ryl_format
+
+  // markdown
+  ["ryl_markdown"] = BaseBuiltins.ryl_markdown
+  ["ryl_markdown_format"] = BaseBuiltins.ryl_markdown_format
+  ["rumdl"] = BaseBuiltins.rumdl
 }
 
 hooks {
