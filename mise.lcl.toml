@@ -7,9 +7,10 @@ includes = ["./tasks"]
 lockfile = true
 
 [tools]
-pkl = "0.32.1"
+pkl = "0.32.2"
+jactionlint = "2.3.0"
 
 [tools."github:knope-dev/knope"]
-version = "v0.23.1"
+version = "v0.23.2"
 version_prefix = "knope/"
 platforms = { macos-arm64 = { asset_pattern = "*aarch64-apple-darwin.tgz" }, macos-x64 = { asset_pattern = "*x86_64-apple-darwin.tgz" }, linux-x64 = { asset_pattern = "*x86_64-unknown-linux-musl.tgz" }, linux-arm64 = { asset_pattern = "*aarch64-unknown-linux-musl.tgz" } }
