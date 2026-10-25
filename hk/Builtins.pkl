@@ -1,2 +1,2 @@
 /// Keep this version in lockstep with the `Config.pkl` version `base.pkl` amends.
-amends "package://github.com/jdx/hk/releases/download/v2.8.0/hk@2.8.0#/Builtins.pkl"
+amends "package://github.com/jdx/hk/releases/download/v2.8.1/hk@2.8.1#/Builtins.pkl"
