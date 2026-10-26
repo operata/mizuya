@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.2.0-alpha.0 (2026-10-26)
+
+### Breaking Changes
+
+- move stack configs into per-stack dirs (#13)
+
+### Features
+
+- add kubernetes stack pack (#14)
+- add terraform stack pack (#15)
+
 ## 0.1.3 (2026-10-21)
 
 ### Fixes
