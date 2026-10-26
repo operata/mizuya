@@ -25,7 +25,6 @@ package {
     "mise.*"
     "mise/**"
     "tasks/**"
-    "hk.pkl"
     "knope.toml"
     "CHANGELOG.md"
   }
