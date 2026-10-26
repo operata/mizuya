@@ -1,17 +1,19 @@
 name: Prepare release
 # On every push to main, recompute the next version from Conventional Commits
 # and open/update the "release" PR with the changelog. No tag is created here.
+# Can also be run manually (from main) to refresh the PR.
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 concurrency:
   group: ${{ github.workflow }}
   cancel-in-progress: true
 permissions: {}
 jobs:
   prepare-release:
-    # Skip the merge commit produced by merging the release PR itself.
-    if: "!contains(github.event.head_commit.message, 'chore: prepare release')"
+    # Only from main. Skip the merge commit produced by merging the release PR itself.
+    if: "github.ref == 'refs/heads/main' && !contains(github.event.head_commit.message, 'chore: prepare release')"
     runs-on: ubuntu-slim
     timeout-minutes: 10
     permissions:
