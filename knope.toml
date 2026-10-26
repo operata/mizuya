@@ -2,7 +2,7 @@
 [package]
 changelog = "CHANGELOG.md"
 versioned_files = [
-  { path = "PklProject", regex = "version = \"(?<version>\\d+\\.\\d+\\.\\d+)\"" },
+  { path = "PklProject", regex = "version = \"(?<version>\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z.]+)?)\"" },
 ]
 
 # --- prepare-release-bot ---------------------------------------------------
@@ -64,6 +64,17 @@ template = "chore: prepare release $version"
 
 [workflows.steps.body]
 template = "Merging this PR will tag and release `$version`.\n\n$changelog"
+
+# --- prepare-prerelease ----------------------------------------------------
+# Used by the `prerelease` workflow (.github/workflows/prerelease.yaml). Only
+# bumps PklProject and the changelog in the working tree; the label comes from
+# `--prerelease-label` / KNOPE_PRERELEASE_LABEL. The commit, branch and release
+# are handled by .github/scripts/prerelease.sh, so no `release` branch is touched.
+[[workflows]]
+name = "prepare-prerelease"
+
+[[workflows.steps]]
+type = "PrepareRelease"
 
 # --- release ---------------------------------------------------------------
 # Run when the `release` PR merges. Creates the GitHub release + `v*` tag,
