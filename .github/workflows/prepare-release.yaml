@@ -13,7 +13,8 @@ permissions: {}
 jobs:
   prepare-release:
     # Only from main. Skip the merge commit produced by merging the release PR itself.
-    if: "github.ref == 'refs/heads/main' && !contains(github.event.head_commit.message, 'chore: prepare release')"
+    # startsWith, not contains: a squash-merged PR lists its commit messages in the body.
+    if: "github.ref == 'refs/heads/main' && !startsWith(github.event.head_commit.message, 'chore: prepare release')"
     runs-on: ubuntu-slim
     timeout-minutes: 10
     permissions:

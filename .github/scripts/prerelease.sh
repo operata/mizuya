@@ -21,6 +21,26 @@ esac
 
 package_version() { pkl eval -x 'package.version' PklProject; }
 
+# The bump commit must never land on a named branch (it would leak the prerelease version into a PR
+# or main), so work on a detached HEAD and restore the original branch afterwards.
+if ! git diff --quiet HEAD; then
+  echo "working tree has uncommitted changes; run from a clean checkout" >&2
+  exit 1
+fi
+orig=$(git symbolic-ref -q --short HEAD || true)
+pushed_branch=""
+cleanup() {
+  if [ -n "$pushed_branch" ]; then
+    git push --quiet origin --delete "$pushed_branch" || true
+  fi
+  if [ -n "$orig" ]; then
+    git reset --hard --quiet
+    git switch --quiet "$orig"
+  fi
+}
+trap cleanup EXIT
+git switch --detach --quiet
+
 knope prepare-prerelease --prerelease-label "$label"
 version=$(package_version)
 
@@ -31,7 +51,6 @@ if git ls-remote --exit-code --tags origin "refs/tags/v${version}" >/dev/null 2>
   last=$(git ls-remote --tags origin "refs/tags/v${base}-${label}.*" |
     sed -E "s#.*-${label}\.([0-9]+)\$#\1#" | sort -n | tail -1)
   git reset --hard --quiet HEAD
-  git clean -fdq
   knope prepare-prerelease --prerelease-label "$label" \
     --override-version "${base}-${label}.$((last + 1))"
   version=$(package_version)
@@ -45,8 +64,8 @@ git commit -m "chore: prepare release ${version}"
 sha=$(git rev-parse HEAD)
 
 # The tag must point at a commit that exists on the remote before the release is created.
+pushed_branch="$branch"
 git push origin "HEAD:refs/heads/${branch}"
-trap 'git push --quiet origin --delete "$branch" || true' EXIT
 
 # Newest changelog section, without its heading.
 notes=$(mktemp)
