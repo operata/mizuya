@@ -8,7 +8,7 @@ amends "pkl:Project"
 package {
   name = "mizuya"
   baseUri = "package://github.com/operata/mizuya/releases/download/v\(version)/mizuya"
-  version = "0.2.0"
+  version = "0.2.1-beta.0"
   packageZipUrl = "https://github.com/operata/mizuya/releases/download/v\(version)/mizuya@\(version).zip"
   sourceCode = "https://github.com/operata/mizuya"
   sourceCodeUrlScheme = "https://github.com/operata/mizuya/blob/v\(version)%{path}#L%{line}-L%{endLine}"

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.1-beta.0 (2026-10-27)
+
+### Features
+
+- exclude agent markdown from linting, add helm steps (#20)
+
 ## 0.2.0 (2026-10-26)
 
 ### Breaking Changes
