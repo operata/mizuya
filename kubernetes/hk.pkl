@@ -6,7 +6,9 @@ local helmGlob =
 
 steps {
   // plain manifests (excludes Helm/kustomize files, see the builtin)
-  ["kubeconform"] = Builtins.kubeconform
+  ["kubeconform"] = (Builtins.kubeconform) {
+    exclude = helmGlob
+  }
 
   // helm — one run per chart (any dir holding a Chart.yaml) when a file inside it changes.
   ["helm-lint"] = new Config.Step {
