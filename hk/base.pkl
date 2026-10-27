@@ -58,8 +58,12 @@ steps {
   ["shellcheck"] = BaseBuiltins.shellcheck
 
   // yaml
-  ["ryl"] = BaseBuiltins.ryl
-  ["ryl_format"] = BaseBuiltins.ryl_format
+  ["ryl"] = (BaseBuiltins.ryl) {
+    exclude = List("deployments/helm/**/templates/**", "**/*.tmpl.yaml", "openapi/**")
+  }
+  ["ryl_format"] = (BaseBuiltins.ryl_format) {
+    exclude = List("deployments/helm/**/templates/**", "**/*.tmpl.yaml", "openapi/**")
+  }
 
   // markdown
   ["ryl_markdown"] = (BaseBuiltins.ryl_markdown) { exclude = agentMarkdown }
