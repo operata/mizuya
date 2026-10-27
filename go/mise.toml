@@ -1,4 +1,8 @@
+[env]
+GOPRIVATE = "github.com/operata"
+
 [tools]
 go = "1.27.3"
 golangci-lint = "2.15.0"
 "go:golang.org/x/vuln/cmd/govulncheck" = "1.9.0"
+ko = "0.19.1"

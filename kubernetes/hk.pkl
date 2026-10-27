@@ -1,5 +1,25 @@
 import "../hk/Builtins.pkl" as Builtins
+import "../hk/Config.pkl" as Config
+
+local helmGlob =
+  List("**/Chart.yaml", "**/Chart.lock", "**/values*.yaml", "**/templates/**", "**/charts/**")
 
 steps {
+  // plain manifests (excludes Helm/kustomize files, see the builtin)
   ["kubeconform"] = Builtins.kubeconform
+
+  // helm — one run per chart (any dir holding a Chart.yaml) when a file inside it changes.
+  ["helm-lint"] = new Config.Step {
+    glob = helmGlob
+    workspace_indicator = "Chart.yaml"
+    check = "helm lint {{workspace}}"
+  }
+  // Schema-validate the *rendered* manifests: chart templates are Go templates, not valid YAML.
+  // -ignore-missing-schemas skips CRDs (e.g. ExternalSecret) with no upstream schema.
+  ["helm-kubeconform"] = new Config.Step {
+    glob = helmGlob
+    workspace_indicator = "Chart.yaml"
+    check =
+      "helm template release {{workspace}} | kubeconform -strict -summary -ignore-missing-schemas"
+  }
 }

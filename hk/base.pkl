@@ -1,4 +1,4 @@
-amends "package://github.com/jdx/hk/releases/download/v2.8.1/hk@2.8.1#/Config.pkl"
+amends "Config.pkl"
 
 import "Builtins.pkl" as BaseBuiltins
 
@@ -15,6 +15,26 @@ import "Builtins.pkl" as BaseBuiltins
 ///
 /// The hk/Builtins version is pinned once in `builtins.pkl`; other repos import it from
 /// the published mizuya package instead of pinning `jdx/hk`'s package URL themselves.
+/// Agent instruction/config markdown: tool-owned, not ours to lint.
+local agentMarkdown =
+  List(
+    "**/CLAUDE.md",
+    "**/CLAUDE.local.md",
+    "**/AGENTS.md",
+    "**/GEMINI.md",
+    "**/.claude/**",
+    "**/.agents/**",
+    "**/.cursor/**",
+    "**/.windsurf/**",
+    "**/.clinerules/**",
+    "**/.gemini/**",
+    "**/.codex/**",
+    ".github/copilot-instructions.md",
+    ".github/instructions/**",
+    ".github/prompts/**",
+    ".github/agents/**",
+  )
+
 steps {
   // repo guards
   ["trailing-whitespace"] = BaseBuiltins.trailing_whitespace
@@ -42,9 +62,9 @@ steps {
   ["ryl_format"] = BaseBuiltins.ryl_format
 
   // markdown
-  ["ryl_markdown"] = BaseBuiltins.ryl_markdown
-  ["ryl_markdown_format"] = BaseBuiltins.ryl_markdown_format
-  ["rumdl"] = BaseBuiltins.rumdl
+  ["ryl_markdown"] = (BaseBuiltins.ryl_markdown) { exclude = agentMarkdown }
+  ["ryl_markdown_format"] = (BaseBuiltins.ryl_markdown_format) { exclude = agentMarkdown }
+  ["rumdl"] = (BaseBuiltins.rumdl) { exclude = agentMarkdown }
 }
 
 hooks {
