@@ -12,6 +12,3 @@ rumdl = "0.3.0"
 
 [hooks]
 postinstall = "hk install --mise"
-
-[env]
-GOPRIVATE = "github.com/operata"

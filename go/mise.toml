@@ -1,3 +1,6 @@
+[env]
+GOPRIVATE = "github.com/operata"
+
 [tools]
 go = "1.27.3"
 golangci-lint = "2.15.0"
