@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.1 (2026-10-27)
+
+### Features
+
+- exclude agent markdown from linting, add helm steps (#20)
+
+### Fixes
+
+- exclude the helm chart definition and values from kubeconform linting (#22)
+
 ## 0.2.0 (2026-10-26)
 
 ### Breaking Changes
