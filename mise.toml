@@ -2,7 +2,7 @@ min_version = "2026.10.8"
 
 [tools]
 editorconfig-checker = "4.0.2"
-"github:owenlamont/ryl" = "0.26.0"                   # lints & auto-fixes YAML (Rust yamllint)
+"github:owenlamont/ryl" = "0.26.1"                   # lints & auto-fixes YAML (Rust yamllint)
 hk = { version = "2.8.1", workflow = "release.yml" } # runner to orchestrate the hooks below
 shellcheck = "0.11.0"                                # lints shell scripts
 shfmt = "3.14.1"                                     # formats shell scripts
