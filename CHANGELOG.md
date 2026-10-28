@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.2-beta.0 (2026-10-28)
+
+### Features
+
+- exclude helm templates, tmpl yaml and openapi from ryl (#23)
+
 ## 0.2.1 (2026-10-27)
 
 ### Features
