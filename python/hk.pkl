@@ -1,0 +1,7 @@
+import "../hk/Builtins.pkl" as Builtins
+
+steps {
+  ["ruff"] = Builtins.ruff
+  ["ruff-format"] = Builtins.ruff_format
+  ["ty"] = Builtins.ty
+}
