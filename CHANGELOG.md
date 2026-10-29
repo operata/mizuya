@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.3.0 (2026-10-29)
+
+### Breaking Changes
+
+- upgrade mise tools and hk to latest (#25)
+
+### Features
+
+- run helm checks per values.*.yaml overlay (#26)
+- add basic ruff, ruff-format and ty support (#27)
+
 ## 0.2.2 (2026-10-28)
 
 ### Features
