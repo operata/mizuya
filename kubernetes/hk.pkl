@@ -4,17 +4,22 @@ import "../hk/Config.pkl" as Config
 local helmGlob =
   List("**/Chart.yaml", "**/Chart.lock", "**/values*.yaml", "**/templates/**", "**/charts/**")
 
+// Run `cmd` once per values.*.yaml overlay in the chart ($v, $ws); once with chart defaults if none exist.
+local function perValues(cmd: String): String =
+  "ws={{workspace}}; set -- \"$ws\"/values.*.yaml; [ -e \"$1\" ] || set -- \"\"; for v; do \(cmd) || exit 1; done"
+
 steps {
   // plain manifests (excludes Helm/kustomize files, see the builtin)
   ["kubeconform"] = (Builtins.kubeconform) {
     exclude = helmGlob
   }
 
-  // helm — one run per chart (any dir holding a Chart.yaml) when a file inside it changes.
+  // helm — one run per chart (any dir holding a Chart.yaml) when a file inside it changes,
+  // repeated for each values.*.yaml overlay found next to the Chart.yaml.
   ["helm-lint"] = new Config.Step {
     glob = helmGlob
     workspace_indicator = "Chart.yaml"
-    check = "helm lint {{workspace}}"
+    check = perValues("helm lint \"$ws\" ${v:+-f \"$v\"}")
   }
   // Schema-validate the *rendered* manifests: chart templates are Go templates, not valid YAML.
   // -ignore-missing-schemas skips CRDs (e.g. ExternalSecret) with no upstream schema.
@@ -22,6 +27,8 @@ steps {
     glob = helmGlob
     workspace_indicator = "Chart.yaml"
     check =
-      "helm template release {{workspace}} | kubeconform -strict -summary -ignore-missing-schemas"
+      perValues(
+        "helm template release \"$ws\" ${v:+-f \"$v\"} | kubeconform -strict -summary -ignore-missing-schemas",
+      )
   }
 }
