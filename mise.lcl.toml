@@ -8,7 +8,7 @@ lockfile = true
 
 [tools]
 pkl = "0.32.2"
-jactionlint = "2.3.0"
+jactionlint = "2.4.0"
 
 [tools."github:knope-dev/knope"]
 version = "v0.23.2"
