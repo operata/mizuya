@@ -4,6 +4,9 @@
     "config:recommended"
   ],
   "semanticCommits": "enabled",
+  "lockFileMaintenance": {
+    "enabled": true
+  },
   "customManagers": [
     {
       "customType": "regex",
@@ -24,48 +27,20 @@
   "packageRules": [
     {
       "description": "mise tool patch updates are fixes",
-      "matchManagers": [
-        "mise"
-      ],
-      "matchUpdateTypes": [
-        "patch"
-      ],
+      "matchManagers": ["mise"],
+      "matchUpdateTypes": ["patch"],
       "semanticCommitType": "fix"
     },
     {
       "description": "mise tool minor/major updates are features",
-      "matchManagers": [
-        "mise"
-      ],
-      "matchUpdateTypes": [
-        "minor",
-        "major"
-      ],
+      "matchManagers": ["mise"],
+      "matchUpdateTypes": ["minor", "major"],
       "semanticCommitType": "feat"
     },
     {
       "description": "bump hk in mise.toml and the Pkl files in one PR",
-      "matchPackageNames": [
-        "hk",
-        "jdx/hk"
-      ],
+      "matchPackageNames": ["hk", "jdx/hk"],
       "groupName": "hk"
-    },
-    {
-      "description": "refresh mise lockfiles after tool bumps",
-      "matchManagers": [
-        "mise",
-        "custom.regex"
-      ],
-      "postUpgradeTasks": {
-        "commands": [
-          "find . -name mise.toml -not -path './.git/*' -execdir mise lock --platform linux-x64,linux-arm64,macos-arm64 \\;"
-        ],
-        "fileFilters": [
-          "**/mise.lock"
-        ],
-        "executionMode": "branch"
-      }
     }
   ]
 }
