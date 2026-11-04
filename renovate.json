@@ -2,5 +2,42 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
+  ],
+  "semanticCommits": "enabled",
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "hk version pinned in the Pkl amends URLs; keep in lockstep with mise.toml",
+      "managerFilePatterns": [
+        "/^hk/(Builtins|Config)\\.pkl$/"
+      ],
+      "matchStrings": [
+        "amends \"package://github\\.com/jdx/hk/releases/download/v(?<currentValue>[^/\"]+)/hk@[^#\"]+#/"
+      ],
+      "autoReplaceStringTemplate": "amends \"package://github.com/jdx/hk/releases/download/v{{{newValue}}}/hk@{{{newValue}}}#/",
+      "depNameTemplate": "hk",
+      "packageNameTemplate": "jdx/hk",
+      "datasourceTemplate": "github-releases",
+      "extractVersionTemplate": "^v?(?<version>.+)$"
+    }
+  ],
+  "packageRules": [
+    {
+      "description": "mise tool patch updates are fixes",
+      "matchManagers": ["mise"],
+      "matchUpdateTypes": ["patch"],
+      "semanticCommitType": "fix"
+    },
+    {
+      "description": "mise tool minor/major updates are features",
+      "matchManagers": ["mise"],
+      "matchUpdateTypes": ["minor", "major"],
+      "semanticCommitType": "feat"
+    },
+    {
+      "description": "bump hk in mise.toml and the Pkl files in one PR",
+      "matchPackageNames": ["hk", "jdx/hk"],
+      "groupName": "hk"
+    }
   ]
 }
