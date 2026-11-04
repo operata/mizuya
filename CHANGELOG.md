@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.3.0-beta.1 (2026-11-04)
+
+### Breaking Changes
+
+- upgrade mise tools and hk to latest (#25)
+
+### Features
+
+- run helm checks per values.*.yaml overlay (#26)
+- add basic ruff, ruff-format and ty support (#27)
+- upgrade tooling dependencies to latest (#34)
+- update dependency hk to v2.11.1 (#45)
+- update dependency tombi to v1.10.0 (#51)
+
+### Fixes
+
+- update dependency tombi to v1.9.9 (#41)
+- update dependency ty to v0.0.96 (#42)
+- update dependency uv to v0.13.7 (#43)
+- update dependency ty to v0.0.97 (#50)
+
 ## 0.2.2 (2026-10-28)
 
 ### Features
