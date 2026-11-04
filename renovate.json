@@ -4,6 +4,9 @@
     "config:recommended"
   ],
   "semanticCommits": "enabled",
+  "lockFileMaintenance": {
+    "enabled": true
+  },
   "customManagers": [
     {
       "customType": "regex",
