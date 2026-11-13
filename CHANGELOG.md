@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.3.1-beta.0 (2026-11-13)
+
+### Features
+
+- update dependency hk to v2.12.0 (#61)
+- update dependency pkl to v0.33.0 (#57)
+- update dependency tflint to v0.66.0 (#59)
+- update dependency tombi to v1.11.2 (#60)
+- update dependency jactionlint to v2.6.0 (#56)
+- update dependency github:knope-dev/knope to v0.24.0 (#69)
+- update dependency github:owenlamont/ryl to v0.29.0 (#55)
+
+### Fixes
+
+- update dependency go to v1.27.4 (#62)
+- update dependency terraform to v1.17.2 (#67)
+- update dependency ruff to v0.17.5 (#52)
+- update dependency helm to v4.3.2 (#64)
+- update dependency trivy to v0.76.2 (#53)
+- update dependency ty to v0.0.103 (#54)
+- update dependency uv to v0.13.8 (#68)
+
 ## 0.3.0 (2026-11-04)
 
 ### Breaking Changes
