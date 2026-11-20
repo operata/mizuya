@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.3.2 (2026-11-20)
+
+### Features
+
+- update dependency hk to v2.13.0 (#74)
+- update dependency github:owenlamont/ryl to v0.30.0 (#78)
+- update module go:golang.org/x/vuln/cmd/govulncheck to v1.10.0 (#79)
+
+### Fixes
+
+- update dependency tombi to v1.11.3 (#73)
+- update dependency pkl to v0.33.1 (#81)
+- update dependency uv to v0.13.9 (#77)
+- update dependency rumdl to v0.3.5 (#83)
+- update dependency ty to v0.0.107 (#76)
+- update dependency ruff to v0.17.6 (#85)
+
 ## 0.3.1 (2026-11-13)
 
 ### Features
