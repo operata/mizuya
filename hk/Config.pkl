@@ -1,2 +1,2 @@
 /// The one place the hk version is pinned for configs (`hk/Builtins.pkl` pins it for builtins); keep them in lockstep.
-amends "package://github.com/jdx/hk/releases/download/v2.13.0/hk@2.13.0#/Config.pkl"
+amends "package://github.com/jdx/hk/releases/download/v2.14.0/hk@2.14.0#/Config.pkl"
