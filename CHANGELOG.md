@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.3.2 (2026-11-26)
+
+### Features
+
+- update dependency hk to v2.13.0 (#74)
+- update dependency github:owenlamont/ryl to v0.30.0 (#78)
+- update module go:golang.org/x/vuln/cmd/govulncheck to v1.10.0 (#79)
+- update dependency hk to v2.14.0 (#90)
+
+### Fixes
+
+- update dependency tombi to v1.11.3 (#73)
+- update dependency pkl to v0.33.1 (#81)
+- update dependency uv to v0.13.9 (#77)
+- update dependency rumdl to v0.3.5 (#83)
+- update dependency ty to v0.0.107 (#76)
+- update dependency ruff to v0.17.6 (#85)
+- update dependency flux2 to v2.10.1 (#86)
+- update dependency ty to v0.0.108 (#88)
+- update dependency cosign to v3.1.5 (#91)
+- update dependency ty to v0.0.109 (#89)
+- update dependency rumdl to v0.3.6 (#92)
+- update dependency uv to v0.13.10 (#93)
+- update dependency cosign to v3.1.6 (#95)
+- update dependency ty to v0.0.111 (#94)
+
 ## 0.3.1 (2026-11-13)
 
 ### Features
